@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "obsidianboat:obsidianboat"
+    },
+    "title": {
+      "translate": "advancements.obsidianboat.root.title"
+    },
+    "description": {
+      "translate": "advancements.obsidianboat.root.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true,
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png"
+  },
+  "criteria": {
+    "placed_boat": {
+      "trigger": "obsidianboat:obsidianboat",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "placed_boat"
+    ]
+  ]
+}
