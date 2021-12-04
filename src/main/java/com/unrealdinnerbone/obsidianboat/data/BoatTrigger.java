@@ -2,14 +2,14 @@ package com.unrealdinnerbone.obsidianboat.data;
 
 import com.google.gson.JsonObject;
 import com.unrealdinnerbone.obsidianboat.OB;
-import net.minecraft.advancements.criterion.AbstractCriterionTrigger;
-import net.minecraft.advancements.criterion.CriterionInstance;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.loot.ConditionArrayParser;
-import net.minecraft.util.ResourceLocation;
+import net.minecraft.advancements.critereon.AbstractCriterionTriggerInstance;
+import net.minecraft.advancements.critereon.DeserializationContext;
+import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 
-public class BoatTrigger extends AbstractCriterionTrigger<BoatTrigger.Instance> {
+public class BoatTrigger extends SimpleCriterionTrigger<BoatTrigger.Instance> {
 
    public static BoatTrigger INSTANCE = new BoatTrigger();
 
@@ -19,16 +19,17 @@ public class BoatTrigger extends AbstractCriterionTrigger<BoatTrigger.Instance> 
       return ID;
    }
 
-   public BoatTrigger.Instance createInstance(JsonObject jsonObject, EntityPredicate.AndPredicate andPredicate, ConditionArrayParser conditionArrayParser) {
-      return new BoatTrigger.Instance(andPredicate);
-   }
-
-   public void trigger(ServerPlayerEntity serverPlayerEntity) {
+   public void trigger(ServerPlayer serverPlayerEntity) {
       this.trigger(serverPlayerEntity, (value) -> true);
    }
 
-   public static class Instance extends CriterionInstance {
-      public Instance(EntityPredicate.AndPredicate andPredicate) {
+   @Override
+   protected Instance createInstance(JsonObject jsonObject, EntityPredicate.Composite composite, DeserializationContext context) {
+      return new BoatTrigger.Instance(composite);
+   }
+
+   public static class Instance extends AbstractCriterionTriggerInstance {
+      public Instance(EntityPredicate.Composite andPredicate) {
          super(BoatTrigger.ID, andPredicate);
       }
    }

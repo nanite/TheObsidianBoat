@@ -7,9 +7,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-
     }
 }
 
@@ -18,8 +17,9 @@ plugins {
 }
 
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
+
 
 apply from: 'https://files.saps.dev/ci/git-md-changelog.gradle'
 
@@ -29,57 +29,58 @@ archivesBaseName = project.archives_base_name
 version = "${mod_version}-build.${ENV.GITHUB_RUN_NUMBER ?: 9999}+mc${minecraft_version}"
 group = 'com.unrealdinnerbone'
 
-
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 def mixinJson = project.mod_id + ".mixins.json"
+if(!file("src/main/resources/" + mixinJson).exists()) {
+    mixinJson = null
+}
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
     mappings channel: 'official', version: project.minecraft_version
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
-    ModConfig projectMod = new ModConfig(project, project.getName());
+    ModConfig projectMod = new ModConfig(project, project.getName())
     projectMod.sources(project.sourceSets.main)
 
     runs {
         client {
             workingDirectory project.file('run')
             mods.add(projectMod)
-            args '--mixin.config', mixinJson
+            if(mixinJson) args '--mixin.config', mixinJson
         }
 
         server {
             workingDirectory project.file('run')
-            args '--mixin.config', mixinJson
             mods.add(projectMod)
+            if(mixinJson) args '--mixin.config', mixinJson
         }
 
         data {
             workingDirectory project.file('data')
             args '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
             mods.add(projectMod)
+            if(mixinJson) args '--mixin.config', mixinJson
         }
     }
 }
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
-
-mixin {
-    add sourceSets.main, project.mod_id + '.refmap.json'
+if(mixinJson) {
+    mixin {
+        add sourceSets.main, project.mod_id + '.refmap.json'
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:' + project.minecraft_version + '-' + project.forge_version
-    if (System.getProperty("idea.sync.active") != "true") {
-        annotationProcessor 'org.spongepowered:mixin:0.8.2:processor'
-    }
 }
 
 jar {
-     manifest {
+    manifest {
         attributes([
-                "MixinConfigs": mixinJson,
                 "Specification-Title"     : project.mod_id,
                 "Specification-Vendor"    : "UnRealDinnerbone",
                 "Specification-Version"   : "1",
@@ -88,6 +89,7 @@ jar {
                 "Implementation-Vendor"   : "UnRealDinnerbone",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
         ])
+        attributes.put("MixinConfig", mixinJson)
     }
 }
 
@@ -143,9 +145,3 @@ if (ENV.CURSE_DEPLOY) {
         }
     }
 }
-
-
-//Changelog
-//Curse Info
-//println("Changelog: " + getGitChangelog())
-//println("Release Type: " + project.property("release_type"))

@@ -5,33 +5,33 @@ import com.google.gson.GsonBuilder;
 import com.unrealdinnerbone.obsidianboat.OB;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
-import net.minecraft.advancements.criterion.EntityPredicate;
-import net.minecraft.data.AdvancementProvider;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.DirectoryCache;
-import net.minecraft.data.IDataProvider;
-import net.minecraft.util.JSONUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraftforge.fml.event.lifecycle.GatherDataEvent;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.HashCache;
+import net.minecraft.data.advancements.AdvancementProvider;
+import net.minecraft.network.chat.TextComponent;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.GsonHelper;
+import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Collections;
 import java.util.function.Consumer;
+
 
 public class DataEvent {
 
     public static void onData(GatherDataEvent event) {
         event.getGenerator().addProvider(new RecipeDataProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new AdvancementDataProvider(event.getGenerator()));
+        event.getGenerator().addProvider(new AdvancementDataProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new ItemDataProvider(event.getGenerator(), event.getExistingFileHelper()));
         event.getGenerator().addProvider(new LangProvider(event.getGenerator()));
         event.getGenerator().addProvider(new PackMcMeta(event.getGenerator()));
     }
 
-    public static class PackMcMeta implements IDataProvider {
+    public static class PackMcMeta implements DataProvider {
 
         private final static Gson GSON = new GsonBuilder().setPrettyPrinting().create();
         private final DataGenerator dataGenerator;
@@ -42,8 +42,8 @@ public class DataEvent {
 
 
         @Override
-        public void run(DirectoryCache directoryCache) throws IOException {
-            IDataProvider.save(GSON, directoryCache, JSONUtils.parse(GSON.toJson(new Meta(OB.MOD_ID, 6))),dataGenerator.getOutputFolder().resolve("pack.mcmeta"));
+        public void run(HashCache directoryCache) throws IOException {
+            DataProvider.save(GSON, directoryCache, GsonHelper.parse(GSON.toJson(new Meta(OB.MOD_ID, 6))),dataGenerator.getOutputFolder().resolve("pack.mcmeta"));
         }
 
         @Override
@@ -74,14 +74,13 @@ public class DataEvent {
 
     public static class AdvancementDataProvider extends AdvancementProvider {
 
-        public AdvancementDataProvider(DataGenerator generator) {
-            super(generator);
+        public AdvancementDataProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
+            super(generator, existingFileHelper);
         }
 
         @Override
-        public void run(DirectoryCache cache) throws IOException {
-            tabs = Collections.singletonList(new AdvancementData());
-            super.run(cache);
+        protected void registerAdvancements(Consumer<Advancement> consumer, ExistingFileHelper fileHelper) {
+            new AdvancementData().accept(consumer);
         }
     }
 
@@ -94,13 +93,13 @@ public class DataEvent {
 
             Advancement advancement = Advancement.Builder.advancement()
                     .display(OB.ITEM.get(), getTranslation("title"), getTranslation("description"), background, FrameType.TASK, true, true, true)
-                    .addCriterion("placed_boat", new BoatTrigger.Instance(EntityPredicate.AndPredicate.ANY))
+                    .addCriterion("placed_boat", new BoatTrigger.Instance(EntityPredicate.Composite.ANY))
                     .save(consumer, OB.MOD_ID + ":" + OB.MOD_ID);
 
         }
     }
 
     private static TextComponent getTranslation(String key) {
-        return new TranslationTextComponent("advancements." + OB.MOD_ID + ".root." + key);
+        return new TextComponent("advancements." + OB.MOD_ID + ".root." + key);
     }
 }

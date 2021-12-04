@@ -1,89 +1,78 @@
 package com.unrealdinnerbone.obsidianboat.item;
 
-import com.unrealdinnerbone.obsidianboat.OB;
 import com.unrealdinnerbone.obsidianboat.data.BoatTrigger;
 import com.unrealdinnerbone.obsidianboat.entity.ObsidianBoatEntity;
-import net.minecraft.advancements.Advancement;
-import net.minecraft.advancements.Criterion;
-import net.minecraft.advancements.PlayerAdvancements;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.Blocks;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
-import net.minecraft.tags.FluidTags;
-import net.minecraft.util.*;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntitySelector;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.Vec3;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.item.BoatEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.stats.Stats;
-import net.minecraft.util.EntityPredicates;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceContext;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.vector.Vector3d;
-import net.minecraft.world.World;
-
-
 import java.util.function.Predicate;
 
 public class ObsidianBoatItem extends Item {
 
-    private static final Predicate<Entity> ENTITY_PREDICATE =  EntityPredicates.NO_SPECTATORS.and(Entity::isPickable);
+    private static final Predicate<Entity> ENTITY_PREDICATE =  EntitySelector.NO_SPECTATORS.and(Entity::isPickable);
 
     public ObsidianBoatItem(Properties p_i48487_1_) {
         super(p_i48487_1_);
     }
 
     @Override
-    public ActionResult<ItemStack> use(World world, PlayerEntity p_77659_2_, Hand hand) {
+    public InteractionResultHolder<ItemStack> use(Level world, Player p_77659_2_, InteractionHand hand) {
         ItemStack itemstack = p_77659_2_.getItemInHand(hand);
-        RayTraceResult raytraceresult = getPlayerPOVHitResult(world, p_77659_2_, RayTraceContext.FluidMode.ANY);
-        if (raytraceresult.getType() == RayTraceResult.Type.MISS) {
-            return ActionResult.pass(itemstack);
+        BlockHitResult raytraceresult = getPlayerPOVHitResult(world, p_77659_2_, ClipContext.Fluid.ANY);
+        if (raytraceresult.getType() == BlockHitResult.Type.MISS) {
+            return InteractionResultHolder.pass(itemstack);
         } else {
-            Vector3d vector3d = p_77659_2_.getViewVector(1.0F);
+            Vec3 vector3d = p_77659_2_.getViewVector(1.0F);
             double d0 = 5.0D;
             List<Entity> list = world.getEntities(p_77659_2_, p_77659_2_.getBoundingBox().expandTowards(vector3d.scale(5.0D)).inflate(1.0D), ENTITY_PREDICATE);
             if (!list.isEmpty()) {
-                Vector3d vector3d1 = p_77659_2_.getEyePosition(1.0F);
+                Vec3 vector3d1 = p_77659_2_.getEyePosition(1.0F);
 
                 for(Entity entity : list) {
-                    AxisAlignedBB axisalignedbb = entity.getBoundingBox().inflate((double)entity.getPickRadius());
+                    AABB axisalignedbb = entity.getBoundingBox().inflate((double)entity.getPickRadius());
                     if (axisalignedbb.contains(vector3d1)) {
-                        return ActionResult.pass(itemstack);
+                        return InteractionResultHolder.pass(itemstack);
                     }
                 }
             }
 
-            if (raytraceresult.getType() == RayTraceResult.Type.BLOCK) {
+            if (raytraceresult.getType() == BlockHitResult.Type.BLOCK) {
                 ObsidianBoatEntity obsidianBoat = new ObsidianBoatEntity(world, raytraceresult.getLocation().x, raytraceresult.getLocation().y, raytraceresult.getLocation().z);
-                obsidianBoat.yRot = p_77659_2_.yRot;
+                obsidianBoat.yRotO = p_77659_2_.yRotO;
                 if (!world.noCollision(obsidianBoat, obsidianBoat.getBoundingBox().inflate(-0.1D))) {
-                    return ActionResult.fail(itemstack);
+                    return InteractionResultHolder.fail(itemstack);
                 } else {
                     if (!world.isClientSide) {
                         world.addFreshEntity(obsidianBoat);
-                        if (!p_77659_2_.abilities.instabuild) {
+                        if (!p_77659_2_.getAbilities().instabuild) {
                             itemstack.shrink(1);
                         }
                         BlockState state = world.getBlockState(new BlockPos(raytraceresult.getLocation()));
-                        if(state.is(Blocks.WATER) && p_77659_2_ instanceof ServerPlayerEntity) {
-                            BoatTrigger.INSTANCE.trigger((ServerPlayerEntity) p_77659_2_);
+                        if(state.is(Blocks.WATER) && p_77659_2_ instanceof ServerPlayer player) {
+                            BoatTrigger.INSTANCE.trigger(player);
                         }
                     }
                     p_77659_2_.awardStat(Stats.ITEM_USED.get(this));
-                    return ActionResult.sidedSuccess(itemstack, world.isClientSide());
+                    return InteractionResultHolder.sidedSuccess(itemstack, world.isClientSide());
                 }
             } else {
-                return ActionResult.pass(itemstack);
+                return InteractionResultHolder.pass(itemstack);
             }
         }
     }
