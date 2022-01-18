@@ -75,6 +75,7 @@ if(mixinJson) {
 }
 
 dependencies {
+    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
     minecraft 'net.minecraftforge:forge:' + project.minecraft_version + '-' + project.forge_version
 }
 
