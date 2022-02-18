@@ -8,7 +8,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath 'org.spongepowered:mixingradle:0.7.+'
     }
 }
 
@@ -19,6 +19,7 @@ plugins {
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'eclipse'
 
 
 apply from: 'https://files.saps.dev/ci/git-md-changelog.gradle'
@@ -75,7 +76,9 @@ if(mixinJson) {
 }
 
 dependencies {
-    annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    if (System.getProperty("idea.sync.active") != "true") {
+        annotationProcessor 'org.spongepowered:mixin:0.8.4:processor'
+    }
     minecraft 'net.minecraftforge:forge:' + project.minecraft_version + '-' + project.forge_version
 }
 
@@ -90,7 +93,7 @@ jar {
                 "Implementation-Vendor"   : "UnRealDinnerbone",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
         ])
-        attributes.put("MixinConfig", mixinJson)
+        attributes.put("MixinConfigs", mixinJson)
     }
 }
 
