@@ -43,8 +43,6 @@ public class ObsidianBoatEntity extends Boat {
         this(OB.ENTITY_TYPE.get(), worldIn);
     }
 
-
-
     @Override
     public Packet<?> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);

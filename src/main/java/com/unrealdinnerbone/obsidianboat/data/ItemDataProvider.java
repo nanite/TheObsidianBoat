@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemDataProvider extends ItemModelProvider {
 
@@ -19,7 +20,8 @@ public class ItemDataProvider extends ItemModelProvider {
     }
 
     public void itemGenerated(Item item, ResourceLocation texture) {
-        getBuilder(item.getRegistryName().getPath()).parent(getExistingFile(mcLoc("item/generated")))
+        ResourceLocation resourcelocation = ForgeRegistries.ITEMS.getKey(item);
+        getBuilder(resourcelocation.getPath()).parent(getExistingFile(mcLoc("item/generated")))
                 .texture("layer0", texture);
     }
 }

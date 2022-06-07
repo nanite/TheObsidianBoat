@@ -6,29 +6,29 @@ import com.unrealdinnerbone.obsidianboat.OB;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.FrameType;
 import net.minecraft.advancements.critereon.EntityPredicate;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.data.advancements.AdvancementProvider;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.function.Consumer;
 
 
 public class DataEvent {
 
     public static void onData(GatherDataEvent event) {
-        event.getGenerator().addProvider(new RecipeDataProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new AdvancementDataProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new ItemDataProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(new LangProvider(event.getGenerator()));
-        event.getGenerator().addProvider(new PackMcMeta(event.getGenerator()));
+        event.getGenerator().addProvider(true, new RecipeDataProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new AdvancementDataProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new ItemDataProvider(event.getGenerator(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new LangProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new PackMcMeta(event.getGenerator()));
     }
 
     public static class PackMcMeta implements DataProvider {
@@ -42,8 +42,9 @@ public class DataEvent {
 
 
         @Override
-        public void run(HashCache directoryCache) throws IOException {
-            DataProvider.save(GSON, directoryCache, GsonHelper.parse(GSON.toJson(new Meta(OB.MOD_ID, 6))),dataGenerator.getOutputFolder().resolve("pack.mcmeta"));
+        public void run(CachedOutput cachedOutput) throws IOException {
+            DataProvider.saveStable(cachedOutput, GsonHelper.parse(GSON.toJson(new Meta(OB.MOD_ID, 6))),dataGenerator.getOutputFolder().resolve("pack.mcmeta"));
+
         }
 
         @Override
@@ -99,7 +100,7 @@ public class DataEvent {
         }
     }
 
-    private static TextComponent getTranslation(String key) {
-        return new TextComponent("advancements." + OB.MOD_ID + ".root." + key);
+    private static Component getTranslation(String key) {
+        return Component.translatable("advancements." + OB.MOD_ID + ".root." + key);
     }
 }

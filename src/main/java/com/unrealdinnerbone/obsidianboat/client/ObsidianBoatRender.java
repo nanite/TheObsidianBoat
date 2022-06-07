@@ -15,8 +15,8 @@ public class ObsidianBoatRender extends BoatRenderer {
     private final Pair<ResourceLocation, BoatModel> model;
 
     public ObsidianBoatRender(EntityRendererProvider.Context dispatcher) {
-        super(dispatcher);
-        model = Pair.of(new ResourceLocation(OB.MOD_ID, "textures/entity/boat.png"), new BoatModel(dispatcher.bakeLayer(LOCATION)));;
+        super(dispatcher, false);
+        model = Pair.of(new ResourceLocation(OB.MOD_ID, "textures/entity/boat.png"), new BoatModel(dispatcher.bakeLayer(LOCATION), false));;
     }
 
     public Pair<ResourceLocation, BoatModel> getModelWithLocation(Boat boat) {
