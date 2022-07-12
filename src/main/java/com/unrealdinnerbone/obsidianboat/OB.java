@@ -26,7 +26,7 @@ public class OB {
     private static final Logger LOGGER = LogManager.getLogger();
 
 
-    public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITIES, MOD_ID);
+    public static DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MOD_ID);
     public static DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MOD_ID);
 
     public static final RegistryObject<EntityType<ObsidianBoatEntity>> ENTITY_TYPE = ENTITY_TYPES.register(MOD_ID, () ->
