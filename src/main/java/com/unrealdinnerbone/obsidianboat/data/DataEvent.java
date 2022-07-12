@@ -9,13 +9,12 @@ import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
 import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
+import net.minecraftforge.data.event.GatherDataEvent;
 
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -43,7 +42,7 @@ public class DataEvent {
 
         @Override
         public void run(CachedOutput cachedOutput) throws IOException {
-            DataProvider.saveStable(cachedOutput, GsonHelper.parse(GSON.toJson(new Meta(OB.MOD_ID, 6))),dataGenerator.getOutputFolder().resolve("pack.mcmeta"));
+            DataProvider.saveStable(cachedOutput, GsonHelper.parse(GSON.toJson(new Meta(OB.MOD_ID, 9))),dataGenerator.getOutputFolder().resolve("pack.mcmeta"));
 
         }
 
