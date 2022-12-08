@@ -2,7 +2,9 @@ package com.unrealdinnerbone.obsidianboat.data;
 
 import com.unrealdinnerbone.obsidianboat.OB;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.TagKey;
@@ -15,13 +17,13 @@ import java.util.function.Consumer;
 
 public class RecipeDataProvider extends RecipeProvider {
 
-    public RecipeDataProvider(DataGenerator generator) {
-        super(generator);
+    public RecipeDataProvider(PackOutput packOutput) {
+        super(packOutput);
     }
 
     @Override
-    protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
-        ShapedRecipeBuilder.shaped(OB.ITEM.get())
+    protected void buildRecipes(Consumer<FinishedRecipe> consumer) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.TRANSPORTATION, OB.ITEM.get())
                 .define('#', Items.OBSIDIAN)
                 .pattern("# #")
                 .pattern("###")
@@ -30,8 +32,4 @@ public class RecipeDataProvider extends RecipeProvider {
                 .save(consumer);
     }
 
-    @Override
-    public String getName() {
-        return "The Recipes";
-    }
 }

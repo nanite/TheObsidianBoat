@@ -1,6 +1,8 @@
 {
   "pack": {
-    "description": "resources for obsidianboat",
-    "pack_format": 6
+    "description": {
+      "text": "Obsidian Boat"
+    },
+    "pack_format": 10
   }
 }

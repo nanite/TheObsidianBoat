@@ -15,6 +15,6 @@ public class OBClient
     }
 
     public static void doClientStuffTwo(final EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ObsidianBoatRender.LOCATION, () -> BoatModel.createBodyModel(false));
+        event.registerLayerDefinition(ObsidianBoatRender.LOCATION, () -> BoatModel.createBodyModel());
     }
 }

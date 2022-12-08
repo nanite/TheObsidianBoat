@@ -39,8 +39,7 @@ public class OB {
 
     public static final RegistryObject<ObsidianBoatItem> ITEM = ITEMS.register(MOD_ID, () -> new ObsidianBoatItem((new Item.Properties())
             .fireResistant()
-            .stacksTo(1)
-            .tab(CreativeModeTab.TAB_TRANSPORTATION)));
+            .stacksTo(1)));
 
     public OB() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(DataEvent::onData);
