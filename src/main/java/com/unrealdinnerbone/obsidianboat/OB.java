@@ -8,8 +8,10 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -43,10 +45,17 @@ public class OB {
 
     public OB() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(DataEvent::onData);
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onTabEvent);
         CriteriaTriggers.register(BoatTrigger.INSTANCE);
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(OBClient::doClientStuff));
         DistExecutor.runWhenOn(Dist.CLIENT, () -> () -> FMLJavaModLoadingContext.get().getModEventBus().addListener(OBClient::doClientStuffTwo));
         ENTITY_TYPES.register(FMLJavaModLoadingContext.get().getModEventBus());
         ITEMS.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
+
+    public void onTabEvent(CreativeModeTabEvent.BuildContents event) {
+        if(event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+            event.accept(ITEM);
+        }
     }
 }
