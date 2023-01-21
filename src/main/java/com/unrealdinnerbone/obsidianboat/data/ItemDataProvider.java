@@ -2,6 +2,7 @@ package com.unrealdinnerbone.obsidianboat.data;
 
 import com.unrealdinnerbone.obsidianboat.OB;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -10,8 +11,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemDataProvider extends ItemModelProvider {
 
-    public ItemDataProvider(DataGenerator generator, ExistingFileHelper existingFileHelper) {
-        super(generator, OB.MOD_ID, existingFileHelper);
+    public ItemDataProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, OB.MOD_ID, existingFileHelper);
     }
 
     @Override

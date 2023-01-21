@@ -7,7 +7,6 @@ import com.unrealdinnerbone.obsidianboat.item.ObsidianBoatItem;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.api.distmarker.Dist;

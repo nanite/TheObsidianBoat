@@ -23,17 +23,17 @@ public class DataEvent {
 
     public static void onData(GatherDataEvent event) {
         event.getGenerator().addProvider(true, new RecipeDataProvider(event.getGenerator().getPackOutput()));
-        event.getGenerator().addProvider(true, new AdvancementDataProvider(event.getGenerator().getPackOutput(), event.getLookupProvider(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new ItemDataProvider(event.getGenerator(), event.getExistingFileHelper()));
-        event.getGenerator().addProvider(true, new LangProvider(event.getGenerator()));
+        event.getGenerator().addProvider(true, new AdvancementDataProvider(event.getGenerator().getPackOutput(), event.getLookupProvider()));
+        event.getGenerator().addProvider(true, new ItemDataProvider(event.getGenerator().getPackOutput(), event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, new LangProvider(event.getGenerator().getPackOutput()));
         event.getGenerator().addProvider(true, PackMetadataGenerator.forFeaturePack(event.getGenerator().getPackOutput(), Component.literal("Obsidian Boat")));
     }
 
 
     public static class AdvancementDataProvider extends AdvancementProvider {
 
-        public AdvancementDataProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider, ExistingFileHelper existingFileHelper) {
-            super(packOutput, provider, List.of(new AdvancementData()), existingFileHelper);
+        public AdvancementDataProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> provider) {
+            super(packOutput, provider, List.of(new AdvancementData()));
         }
     }
 

@@ -2,12 +2,13 @@ package com.unrealdinnerbone.obsidianboat.data;
 
 import com.unrealdinnerbone.obsidianboat.OB;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.LanguageProvider;
 
 public class LangProvider extends LanguageProvider {
 
-    public LangProvider(DataGenerator generator) {
-        super(generator, OB.MOD_ID, "en_us");
+    public LangProvider(PackOutput packOutput) {
+        super(packOutput, OB.MOD_ID, "en_us");
     }
 
     @Override
