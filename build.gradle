@@ -9,7 +9,7 @@ subprojects {
     ext.ENV = env
     ext.SNAPSHOT = isSnapshot
 
-    version = "${parent.mod_version}${!isSnapshot ? "-build.${ENV.GITHUB_RUN_NUMBER ?: 9999}": ""}+mc${parent.minecraft_version}${isSnapshot ? '-SNAPSHOT' : ''}"
+    version = "${parent.mod_version}+mc${parent.minecraft_version}${isSnapshot ? '-SNAPSHOT' : ''}"
     group = parent.maven_group
 
     jar {

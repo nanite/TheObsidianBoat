@@ -4,11 +4,12 @@ plugins {
     id 'maven-publish'
 }
 
+archivesBaseName = "${project.property("mod_name")}-${project.name}"
+
 apply {
     from file("../gradle/scripts/maven.gradle")
 }
 
-archivesBaseName = "${project.property("mod_name")}-${project.name}"
 
 minecraft {
     version(minecraft_version)
