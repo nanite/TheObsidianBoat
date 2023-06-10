@@ -1,0 +1,30 @@
+modLoader="javafml"
+loaderVersion="[44,)"
+license="All Rights Reserved unless stated otherwise. Distribution permission is given to FeedTheBeast and CurseForge for use in modpacks"
+[[mods]]
+modId="obsidianboat"
+version="${file.jarVersion}"
+displayName="Obsidian Boat"
+logoFile="logo.png"
+authors="UnRealDinnerbone"
+description='''
+Adds an Obsidian Boat that works on lava
+'''
+[[dependencies.obsidianboat]]
+modId="forge"
+mandatory=true
+versionRange="[44,)"
+ordering="NONE"
+side="BOTH"
+[[dependencies.obsidianboat]]
+modId="minecraft"
+mandatory=true
+versionRange="[${minecraft_version}]"
+ordering="NONE"
+side="BOTH"
+[[dependencies.obsidianboat]]
+modId="trenzalore"
+mandatory=true
+versionRange="[${trenzalore_version},)"
+ordering="NONE"
+side="BOTH"
