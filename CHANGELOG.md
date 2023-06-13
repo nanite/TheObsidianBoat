@@ -1,4 +1,3 @@
-### 2.0.0
+### 3.0.0
 
-- Port To Fabric
-- Update to 1.20
+- Update to 1.20.1

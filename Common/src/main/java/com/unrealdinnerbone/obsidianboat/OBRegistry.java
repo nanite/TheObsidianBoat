@@ -13,6 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
 
 import java.util.List;
@@ -23,12 +24,12 @@ public class OBRegistry implements IRegistry {
     private static final RegistryObjects<Item> ITEMS = RegistryFactory.create(Registries.ITEM);
     private static final RegistryObjects<EntityType<?>> ENTITY_TYPES = RegistryFactory.create(Registries.ENTITY_TYPE);
 
-    public static final RegistryEntry<Item> BOAT_ITEM = ITEMS.register("obsidian_boat", ObsidianBoatItem::new);
+    public static final RegistryEntry<ObsidianBoatItem> BOAT_ITEM = ITEMS.register("obsidian_boat", ObsidianBoatItem::new);
 
 
     public static BoatTrigger BOAT_TRIGGER = RegistryFactory.registerCriterion(new BoatTrigger());
 
-    public static final RegistryEntry<EntityType<? extends Boat>> ENTITY_TYPE = ENTITY_TYPES.registerGeneric("obsidian_boat", OBServices.COMPACT.getFactorySupplier());
+    public static final RegistryEntry<EntityType<? extends Boat>> ENTITY_TYPE = ENTITY_TYPES.register("obsidian_boat", OBServices.COMPACT.getFactorySupplier());
 
 
 
