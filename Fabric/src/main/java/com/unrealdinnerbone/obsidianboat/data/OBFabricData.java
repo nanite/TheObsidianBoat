@@ -14,5 +14,6 @@ public class OBFabricData implements DataGeneratorEntrypoint {
         pack.addProvider((output, registriesFuture) -> PackMetadataGenerator.forFeaturePack(output, Component.literal(ObsidianBoat.MOD_ID)));
         pack.addProvider(ModelProvider::new);
         pack.addProvider(LangProvider::new);
+        pack.addProvider(RecipeProvider::new);
     }
 }

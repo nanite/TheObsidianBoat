@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "O": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "pattern": [
+    "O O",
+    "OOO"
+  ],
+  "result": {
+    "item": "obsidianboat:obsidian_boat"
+  },
+  "show_notification": true
+}

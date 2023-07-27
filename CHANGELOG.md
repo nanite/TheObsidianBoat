@@ -1,3 +1,3 @@
-### 3.0.1
+### 3.0.2
 
-Fix Fabirc not having dependency on Trenzalore
+Fix recipe not existing
