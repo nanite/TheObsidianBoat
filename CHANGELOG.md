@@ -1,3 +1,3 @@
-### 3.0.0
+### 3.0.1
 
-- Update to 1.20.1
+Fix Fabirc not having dependency on Trenzalore
