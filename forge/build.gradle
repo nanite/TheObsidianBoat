@@ -1,0 +1,17 @@
+multiLoader.forge() {
+    forgeVersion.set("${forge_version}")
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            fg.component(it)
+        }
+    }
+}
+
+
+dependencies {
+    implementation fg.deobf("com.unrealdinnerbone:trenzalore-forge:${project.property("trenzalore_version")}")
+}

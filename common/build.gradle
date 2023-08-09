@@ -1,0 +1,7 @@
+multiLoader.common()
+
+publishing.publications.mavenJava.from components.java
+
+dependencies {
+    modImplementation("com.unrealdinnerbone:trenzalore-common:${project.property("trenzalore_version")}")
+}
