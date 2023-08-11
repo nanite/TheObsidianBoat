@@ -25,10 +25,12 @@ public class OBRegistry implements IRegistry {
 
     public static BoatTrigger BOAT_TRIGGER = Regeneration.registerCriterion(new BoatTrigger());
 
-    public static final RegistryEntry<EntityType<ObsidianBoatEntity>> ENTITY_TYPE = ENTITY_TYPES.register("obsidian_boat", () -> EntityType.Builder.of((EntityType.EntityFactory<ObsidianBoatEntity>) ObsidianBoatEntity::new, MobCategory.MISC)
-            .sized(1.375F, 0.5625F)
-            .clientTrackingRange(10)
-            .fireImmune().build(ObsidianBoat.MOD_ID + ":" + ObsidianBoat.MOD_ID));
+    public static final RegistryEntry<EntityType<ObsidianBoatEntity>> ENTITY_TYPE = ENTITY_TYPES.register("obsidian_boat", () ->
+            EntityType.Builder.of((EntityType.EntityFactory<ObsidianBoatEntity>) ObsidianBoatEntity::new, MobCategory.MISC)
+                    .sized(1.375F, 0.5625F)
+                    .clientTrackingRange(10)
+                    .fireImmune()
+                    .build(ObsidianBoat.MOD_ID + ":" + ObsidianBoat.MOD_ID));
 
 
 

@@ -15,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.jetbrains.annotations.NotNull;
 
 public class ObsidianBoatEntity extends Boat{
 
@@ -197,10 +198,10 @@ public class ObsidianBoatEntity extends Boat{
     }
 
     @Override
+    @NotNull
     public Item getDropItem() {
         return OBRegistry.BOAT_ITEM.get();
     }
-
 
     @Override
     public ItemStack getPickResult() {
@@ -209,6 +210,7 @@ public class ObsidianBoatEntity extends Boat{
 
 
     @Override
+    @NotNull
     public Type getVariant() {
         return Type.OAK;
     }
