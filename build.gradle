@@ -52,7 +52,7 @@ subprojects {
         }
         maven {
             name = "nanite"
-            url = uri("https://maven.nanite.dev/snapshots")
+            url = uri("https://maven.nanite.dev/releases")
         }
     }
 
