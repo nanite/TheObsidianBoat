@@ -13,5 +13,5 @@ publishing {
 
 
 dependencies {
-    implementation fg.deobf("com.unrealdinnerbone:trenzalore-forge:${project.property("trenzalore_version")}")
+    implementation fg.deobf("com.unrealdinnerbone:trenzalore-forge:${project.property("trenzalore_version")}+mc${project.property("minecraft_version")}")
 }

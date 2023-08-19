@@ -1,7 +1,7 @@
 import dev.nanite.mlp.tasks.SingleOutputJar
 
 plugins {
-    id("dev.nanite.mlp") version("0.0.3")
+    id("dev.nanite.mlp") version("0.0.4")
     id("java")
     id "me.modmuss50.mod-publish-plugin" version "0.3.0"
 
@@ -27,14 +27,19 @@ allprojects {
     def isSnapshot = providers.environmentVariable('SNAPSHOT').is("true")
     version = "${mod_version}+mc${minecraft_version}${isSnapshot ? '-SNAPSHOT' : ''}"
     setArchivesBaseName("${mod_name}-${project.name}".toLowerCase())
-    group = "com.unrealdinnerbone"
+    group = project.property("maven_group")
 }
 
 subprojects {
     apply plugin: 'dev.nanite.mlp'
     apply plugin: 'maven-publish'
 
-    project.sourceSets.main.resources.srcDir(project.file('src/generated/resources'))
+
+
+    afterEvaluate {
+        sourceSets.main.resources.srcDir(project.file('src/generated/resources'))
+    }
+
 
     base {
         archivesName = "${mod_name}-${project.name}".toLowerCase()
