@@ -17,7 +17,7 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-public class ObsidianBoatEntity extends Boat{
+public class ObsidianBoatEntity extends Boat {
 
     public ObsidianBoatEntity(EntityType<? extends Boat> entityType, Level level) {
         super(entityType, level);

@@ -1,11 +1,26 @@
 pluginManagement {
     repositories {
+        mavenLocal()
         gradlePluginPortal()
         maven {
             name = 'Creeperhost'
             url = 'https://maven.creeperhost.net/'
         }
+        maven {
+            name = 'Sponge Snapshots'
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
     }
+
+
+    plugins {
+        id "org.jetbrains.gradle.plugin.idea-ext" version "1.1.7" apply(false)
+        id 'org.gradle.toolchains.foojay-resolver-convention' version '0.5.0'
+    }
+
 }
 
-include("common", "fabric", "forge")
+
+
+
+include("common", "neo", "fabric", "forge")

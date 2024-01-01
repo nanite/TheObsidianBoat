@@ -68,7 +68,7 @@ public class ObsidianBoatItem extends Item {
                         }
                         BlockState state = world.getBlockState(BlockPos.containing(raytraceresult.getLocation()));
                         if(state.is(Blocks.WATER) && p_77659_2_ instanceof ServerPlayer player) {
-                            OBRegistry.BOAT_TRIGGER.trigger(player);
+                            OBRegistry.BOAT_TRIGGER.get().trigger(player);
                         }
                     }
                     p_77659_2_.awardStat(Stats.ITEM_USED.get(this));

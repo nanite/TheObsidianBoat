@@ -2,16 +2,32 @@ multiLoader.forge() {
     forgeVersion.set("${forge_version}")
 }
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            from components.java
-            fg.component(it)
-        }
+publishing.publications.mavenJava.artifact jar
+
+repositories {
+    maven {
+        url "https://cursemaven.com"
+    }
+    maven {
+        url "https://maven.nanite.dev/releases"
     }
 }
 
 
+java.sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main/java", project(":common").file("src/client/java")]
+        }
+        resources {
+            srcDirs = ["src/main/resources", project(":common").file("src/client/resources")]
+        }
+    }
+}
+
 dependencies {
-    implementation fg.deobf("com.unrealdinnerbone:trenzalore-forge:${project.property("trenzalore_version")}+mc${project.property("minecraft_version")}")
+    implementation(fg.deobf("com.unrealdinnerbone:trenzalore-forge:${project.property("trenzalore_version")}+mc${project.property("minecraft_version")}")) {
+        transitive = true
+    }
+//    implementation fg.deobf("mekanism:Mekanism:${mekanism_version}")
 }

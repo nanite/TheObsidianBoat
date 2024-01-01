@@ -8,12 +8,14 @@ import net.minecraft.client.renderer.entity.BoatRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.vehicle.Boat;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 public class ObsidianBoatRender extends BoatRenderer {
 
     public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(ObsidianBoat.MOD_ID, "obsidian_boat"), "main");
+
 
     private final ResourceLocation texture;
     public ObsidianBoatRender(EntityRendererProvider.Context dispatcher) {
@@ -23,6 +25,7 @@ public class ObsidianBoatRender extends BoatRenderer {
     }
 
     @Override
+    @NotNull
     public ResourceLocation getTextureLocation(Boat boat) {
         return texture;
     }
