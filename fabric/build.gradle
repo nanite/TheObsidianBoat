@@ -3,6 +3,17 @@ multiLoader.fabric() {
     fabricApiVersion.set("${fabric_version}")
 }
 
+java.sourceSets {
+    client {
+        java {
+            srcDirs = ["src/client/java", project(":common").file("src/client/java")]
+        }
+        resources {
+            srcDirs = ["src/client/resources", project(":common").file("src/client/resources")]
+        }
+    }
+}
+
 dependencies {
     modImplementation("com.unrealdinnerbone:trenzalore-fabric:${project.property("trenzalore_version")}+mc${project.property("minecraft_version")}")
 }

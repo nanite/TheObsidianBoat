@@ -1,3 +1,3 @@
-### 4.0.0
+### 4.0.2
 
-- Fix Dependencies
+- Fix Crash on Fabric
