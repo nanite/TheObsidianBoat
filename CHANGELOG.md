@@ -1,3 +1,4 @@
-### 4.0.2
+### 4.0.3
 
-- Fix Crash on Fabric
+- Fix Boats placing the wrong direction
+- Boats placing now trigger Game Event (Warden Alert thing)
