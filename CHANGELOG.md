@@ -1,3 +1,4 @@
-### 3.1.2
+### 3.1.3
 
-Fix recipe not existing again
+- Fix Boats placing the wrong direction
+- Boats placing now trigger Game Event (Warden Alert thing)
