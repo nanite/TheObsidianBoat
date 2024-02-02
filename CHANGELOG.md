@@ -1,4 +1,3 @@
-### 3.1.3
+### 3.1.4
 
-- Fix Boats placing the wrong direction
-- Boats placing now trigger Game Event (Warden Alert thing)
+- Fix Client Crash

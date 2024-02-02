@@ -3,6 +3,18 @@ multiLoader.fabric() {
     fabricApiVersion.set("${fabric_version}")
 }
 
+java.sourceSets {
+    client {
+        java {
+            srcDirs = ["src/client/java", project(":common").file("src/client/java")]
+        }
+        resources {
+            srcDirs = ["src/client/resources", project(":common").file("src/client/resources")]
+        }
+    }
+}
+
+
 publishing.publications.mavenJava.from components.java
 
 dependencies {
