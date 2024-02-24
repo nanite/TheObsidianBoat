@@ -1,4 +1,3 @@
-### 4.0.3
+### 4.0.4
 
-- Fix Boats placing the wrong direction
-- Boats placing now trigger Game Event (Warden Alert thing)
+- Fix Advancement not working

@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_obsidian",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_obsidian"
     ]
   ],
   "rewards": {
     "recipes": [
       "obsidianboat:obsidian_boat"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

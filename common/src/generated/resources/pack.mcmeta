@@ -1,8 +1,6 @@
 {
   "pack": {
-    "description": {
-      "text": "obsidianboat"
-    },
-    "pack_format": 15
+    "description": "obsidianboat",
+    "pack_format": 26
   }
 }
