@@ -11,26 +11,28 @@ import net.minecraft.advancements.AdvancementType;
 import net.minecraft.advancements.critereon.ChangeDimensionTrigger;
 import net.minecraft.advancements.critereon.ContextAwarePredicate;
 import net.minecraft.advancements.critereon.ItemUsedOnLocationTrigger;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class AdvancementProvider extends FabricAdvancementProvider {
 
-    public AdvancementProvider(FabricDataOutput output) {
-        super(output);
+    public AdvancementProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(output, registryLookup);
     }
 
     @Override
-    public void generateAdvancement(Consumer<AdvancementHolder> consumer) {
+    public void generateAdvancement(HolderLookup.Provider registryLookup, Consumer<AdvancementHolder> consumer) {
 
 
             consumer.accept(Advancement.Builder.advancement()
                     .display(OBRegistry.BOAT_ITEM.get(), getTranslation("title"), getTranslation("description"), null, AdvancementType.TASK, true, true, true)
                     .addCriterion("placed_boat", OBRegistry.BOAT_TRIGGER.get().createCriterion(new BoatTrigger.Instance(Optional.empty())))
-                    .build(new ResourceLocation(ObsidianBoat.MOD_ID, ObsidianBoat.MOD_ID)));
+                    .build(ObsidianBoat.rl( ObsidianBoat.MOD_ID)));
 
 
 

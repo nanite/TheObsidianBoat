@@ -10,7 +10,8 @@
     },
     "hidden": true,
     "icon": {
-      "item": "obsidianboat:obsidian_boat"
+      "count": 1,
+      "id": "obsidianboat:obsidian_boat"
     },
     "title": {
       "translate": "advancements.obsidianboat.root.title"

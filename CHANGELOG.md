@@ -1,3 +1,3 @@
-### 4.0.4
+### 6.0.0
 
-- Fix Advancement not working
+- Update to Minecraft 1.21

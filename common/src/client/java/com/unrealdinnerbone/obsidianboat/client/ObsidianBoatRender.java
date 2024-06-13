@@ -14,13 +14,13 @@ import java.util.Map;
 
 public class ObsidianBoatRender extends BoatRenderer {
 
-    public static final ModelLayerLocation LOCATION = new ModelLayerLocation(new ResourceLocation(ObsidianBoat.MOD_ID, "obsidian_boat"), "main");
+    public static final ModelLayerLocation LOCATION = new ModelLayerLocation(ObsidianBoat.rl( "obsidian_boat"), "main");
 
 
     private final ResourceLocation texture;
     public ObsidianBoatRender(EntityRendererProvider.Context dispatcher) {
         super(dispatcher, false);
-        this.texture = new ResourceLocation(ObsidianBoat.MOD_ID, "textures/entity/obsidian_boat.png");
+        this.texture = ObsidianBoat.rl("textures/entity/obsidian_boat.png");
         boatResources = Map.of(Boat.Type.OAK, Pair.of(texture, new BoatModel(dispatcher.bakeLayer(LOCATION))));
     }
 

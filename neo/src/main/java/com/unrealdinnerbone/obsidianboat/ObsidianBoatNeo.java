@@ -5,11 +5,11 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 
 @Mod(ObsidianBoat.MOD_ID)
-public class ObsidianBoatForge {
+public class ObsidianBoatNeo {
     
-    public ObsidianBoatForge(IEventBus eventBus, Dist dist) {
+    public ObsidianBoatNeo(IEventBus eventBus, Dist dist) {
         if(dist == Dist.CLIENT) {
-            OBClientForge.init(eventBus);
+            OBClientNeo.init(eventBus);
         }
     }
 

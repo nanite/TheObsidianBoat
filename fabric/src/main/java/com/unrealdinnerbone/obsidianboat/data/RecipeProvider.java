@@ -4,6 +4,7 @@ import com.unrealdinnerbone.obsidianboat.OBRegistry;
 import com.unrealdinnerbone.obsidianboat.ObsidianBoat;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -11,12 +12,13 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
 public class RecipeProvider extends FabricRecipeProvider {
 
-    public RecipeProvider(FabricDataOutput output) {
-        super(output);
+    public RecipeProvider(FabricDataOutput output, CompletableFuture<HolderLookup.Provider> registryLookup) {
+        super(output, registryLookup);
     }
 
     @Override
@@ -25,6 +27,6 @@ public class RecipeProvider extends FabricRecipeProvider {
                 .pattern("O O")
                 .pattern("OOO")
                 .unlockedBy("has_obsidian", has(Blocks.OBSIDIAN))
-                .define('O', Blocks.OBSIDIAN).save(exporter, new ResourceLocation(ObsidianBoat.MOD_ID, "obsidian_boat"));
+                .define('O', Blocks.OBSIDIAN).save(exporter, ObsidianBoat.rl("obsidian_boat"));
     }
 }
