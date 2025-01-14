@@ -25,3 +25,7 @@ run
 Fabric/run_client/
 
 neo/runs/
+
+fabric/runs/
+
+common/src/generated/resources/.cache/

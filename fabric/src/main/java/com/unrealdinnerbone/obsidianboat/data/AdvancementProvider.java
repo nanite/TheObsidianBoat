@@ -3,6 +3,7 @@ package com.unrealdinnerbone.obsidianboat.data;
 import com.unrealdinnerbone.obsidianboat.OBRegistry;
 import com.unrealdinnerbone.obsidianboat.ObsidianBoat;
 import com.unrealdinnerbone.obsidianboat.advancements.BoatTrigger;
+import com.unrealdinnerbone.trenzalore.lib.RLUtils;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricAdvancementProvider;
 import net.minecraft.advancements.Advancement;
@@ -30,6 +31,7 @@ public class AdvancementProvider extends FabricAdvancementProvider {
 
 
             consumer.accept(Advancement.Builder.advancement()
+                    .parent(RLUtils.rl("minecraft", "story/root"))
                     .display(OBRegistry.BOAT_ITEM.get(), getTranslation("title"), getTranslation("description"), null, AdvancementType.TASK, true, true, true)
                     .addCriterion("placed_boat", OBRegistry.BOAT_TRIGGER.get().createCriterion(new BoatTrigger.Instance(Optional.empty())))
                     .build(ObsidianBoat.rl( ObsidianBoat.MOD_ID)));

@@ -1,3 +1,4 @@
-### 6.0.0
+### 21.1.1
 
-- Update to Minecraft 1.21
+- Update Version Schema
+- Make Advancement parent minecraft one (so no new tap)
