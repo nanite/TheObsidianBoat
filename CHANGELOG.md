@@ -1,4 +1,3 @@
-### 21.1.1
+### 21.1.2
 
-- Update Version Schema
-- Make Advancement parent minecraft one (so no new tap)
+- Fix Fabric

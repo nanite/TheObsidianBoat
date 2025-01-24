@@ -29,16 +29,11 @@ public class AdvancementProvider extends FabricAdvancementProvider {
     @Override
     public void generateAdvancement(HolderLookup.Provider registryLookup, Consumer<AdvancementHolder> consumer) {
 
-
             consumer.accept(Advancement.Builder.advancement()
                     .parent(RLUtils.rl("minecraft", "story/root"))
                     .display(OBRegistry.BOAT_ITEM.get(), getTranslation("title"), getTranslation("description"), null, AdvancementType.TASK, true, true, true)
                     .addCriterion("placed_boat", OBRegistry.BOAT_TRIGGER.get().createCriterion(new BoatTrigger.Instance(Optional.empty())))
                     .build(ObsidianBoat.rl( ObsidianBoat.MOD_ID)));
-
-
-
-
 
     }
 
