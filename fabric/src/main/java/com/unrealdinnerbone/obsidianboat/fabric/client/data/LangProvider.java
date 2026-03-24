@@ -1,7 +1,7 @@
-package com.unrealdinnerbone.obsidianboat.data;
+package com.unrealdinnerbone.obsidianboat.fabric.client.data;
 
 import com.unrealdinnerbone.obsidianboat.OBRegistry;
-import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
+import net.fabricmc.fabric.api.datagen.v1.FabricPackOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricLanguageProvider;
 import net.minecraft.core.HolderLookup;
 
@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 public class LangProvider extends FabricLanguageProvider {
 
-    protected LangProvider(FabricDataOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
+    protected LangProvider(FabricPackOutput dataOutput, CompletableFuture<HolderLookup.Provider> registryLookup) {
         super(dataOutput, registryLookup);
     }
 

@@ -7,25 +7,22 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Boat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.entity.vehicle.boat.Boat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
-import org.jetbrains.annotations.NotNull;
 
 public class ObsidianBoatEntity extends Boat {
 
     public ObsidianBoatEntity(EntityType<? extends Boat> entityType, Level level) {
-        super(entityType, level);
+        super(entityType, level, () -> OBRegistry.BOAT_ITEM.get());
         this.blocksBuilding = true;
     }
 
     public ObsidianBoatEntity(Level world, double x, double y, double z) {
-        this(OBRegistry.ENTITY_TYPE.get(), world);
+        this(OBRegistry.ENTITY_TYPE.entryValue(), world);
         this.setPos(x, y, z);
         this.setDeltaMovement(Vec3.ZERO);
         this.xo = x;
@@ -38,7 +35,7 @@ public class ObsidianBoatEntity extends Boat {
     }
 
     public ObsidianBoatEntity(Level worldIn) {
-        this(OBRegistry.ENTITY_TYPE.get(), worldIn);
+        this(OBRegistry.ENTITY_TYPE.entryValue(), worldIn);
     }
 
     @Override
@@ -150,7 +147,7 @@ public class ObsidianBoatEntity extends Boat {
         double d0 = (double)-0.04F;
         double d1 = this.isNoGravity() ? 0.0D : (double)-0.04F;
         double d2 = 0.0D;
-        this.invFriction = 0.05F;
+        float invFriction = 0.05F;
         if (this.oldStatus == Status.IN_AIR && this.status != Status.IN_AIR && this.status != Status.ON_LAND) {
             this.waterLevel = this.getY(1.0D);
             this.setPos(this.getX(), (double)(this.getWaterLevelAbove() - this.getBbHeight()) + 0.101D, this.getZ());
@@ -160,25 +157,25 @@ public class ObsidianBoatEntity extends Boat {
         } else {
             if (this.status == Status.IN_WATER) {
                 d2 = (this.waterLevel - this.getY()) / (double)this.getBbHeight() + 0.35;
-                this.invFriction = 0.9F;
+                invFriction = 0.9F;
             } else if (this.status == Status.UNDER_FLOWING_WATER) {
                 d1 = -7.0E-4D;
-                this.invFriction = 0.9F;
+                invFriction = 0.9F;
             } else if (this.status == Status.UNDER_WATER) {
                 d2 = 0.01F;
-                this.invFriction = 0.45F;
+                invFriction = 0.45F;
             } else if (this.status == Status.IN_AIR) {
-                this.invFriction = 0.9F;
+                invFriction = 0.9F;
             } else if (this.status == Status.ON_LAND) {
-                this.invFriction = this.landFriction;
+                invFriction = this.landFriction;
                 if (this.getControllingPassenger() instanceof Player) {
                     this.landFriction /= 2.0F;
                 }
             }
 
             Vec3 vector3d = this.getDeltaMovement();
-            this.setDeltaMovement(vector3d.x * (double)this.invFriction, vector3d.y + d1, vector3d.z * (double)this.invFriction);
-            this.deltaRotation *= this.invFriction;
+            this.setDeltaMovement(vector3d.x * (double)invFriction, vector3d.y + d1, vector3d.z * (double)invFriction);
+            this.deltaRotation *= invFriction;
             if (d2 > 0.0D) {
                 Vec3 vector3d1 = this.getDeltaMovement();
                 this.setDeltaMovement(vector3d1.x, (vector3d1.y + d2 * 0.06153846016296973D) * 0.75D, vector3d1.z);
@@ -196,23 +193,4 @@ public class ObsidianBoatEntity extends Boat {
     public boolean fireImmune() {
         return true;
     }
-
-    @Override
-    @NotNull
-    public Item getDropItem() {
-        return OBRegistry.BOAT_ITEM.get();
-    }
-
-    @Override
-    public ItemStack getPickResult() {
-        return new ItemStack(getDropItem());
-    }
-
-
-    @Override
-    @NotNull
-    public Type getVariant() {
-        return Type.OAK;
-    }
-
 }

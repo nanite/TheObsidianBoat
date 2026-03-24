@@ -1,5 +1,6 @@
-package com.unrealdinnerbone.obsidianboat;
+package com.unrealdinnerbone.obsidianboat.neo;
 
+import com.unrealdinnerbone.obsidianboat.ObsidianBoat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;

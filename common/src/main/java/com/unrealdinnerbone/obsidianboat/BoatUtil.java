@@ -2,7 +2,7 @@ package com.unrealdinnerbone.obsidianboat;
 
 import com.unrealdinnerbone.obsidianboat.entity.ObsidianBoatEntity;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.vehicle.Boat;
+import net.minecraft.world.entity.vehicle.boat.Boat;
 
 import java.util.Arrays;
 import java.util.List;

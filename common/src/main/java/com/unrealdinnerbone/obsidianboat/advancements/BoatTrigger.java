@@ -3,27 +3,25 @@ package com.unrealdinnerbone.obsidianboat.advancements;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.unrealdinnerbone.obsidianboat.ObsidianBoat;
-import com.unrealdinnerbone.trenzalore.lib.RLUtils;
-import net.minecraft.advancements.critereon.ContextAwarePredicate;
-import net.minecraft.advancements.critereon.EntityPredicate;
-import net.minecraft.advancements.critereon.SimpleCriterionTrigger;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.advancements.criterion.ContextAwarePredicate;
+import net.minecraft.advancements.criterion.EntityPredicate;
+import net.minecraft.advancements.criterion.SimpleCriterionTrigger;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.ExtraCodecs;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Optional;
 
+@NullMarked
 public class BoatTrigger extends SimpleCriterionTrigger<BoatTrigger.Instance> {
 
-   public static final ResourceLocation ID = ObsidianBoat.rl(ObsidianBoat.MOD_ID);
+   public static final Identifier ID = ObsidianBoat.id(ObsidianBoat.MOD_ID);
 
    public void trigger(ServerPlayer serverPlayerEntity) {
       this.trigger(serverPlayerEntity, (value) -> true);
    }
 
    @Override
-   @NotNull
    public Codec<Instance> codec() {
       return Instance.CODEC;
    }

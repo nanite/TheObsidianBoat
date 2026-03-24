@@ -1,12 +1,12 @@
 plugins {
-    id("dev.nanite.mlp") version("0.3.0")
+    id("dev.nanite.mlp") version("0.6.1")
     id("java-library")
     id("maven-publish")
-    id("me.modmuss50.mod-publish-plugin") version "0.3.0"
+    id("me.modmuss50.mod-publish-plugin") version "0.8.1"
     id 'org.jetbrains.gradle.plugin.idea-ext' version '1.0'
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 multiLoader.root() {
     minecraftVersion.set(project.property("minecraft_version"))
@@ -27,11 +27,10 @@ publishMods {
     type = STABLE
 
     def fabricOptions = publishOptions {
-        file = project.provider { project(":fabric").tasks.remapJar }.flatMap { it.archiveFile }
+        file = project.provider { project(":fabric").tasks.jar }.flatMap { it.archiveFile }
         displayName = "${project.name} Fabric ${mod_version}+mc${minecraft_version}"
         modLoaders.add("fabric")
     }
-
 
     def neoOptions = publishOptions {
         file = project.provider { project(":neo").tasks.jar }.flatMap { it.archiveFile }

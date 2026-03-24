@@ -1,16 +1,13 @@
-accessWidener v1 named
-accessible field net/minecraft/world/entity/vehicle/Boat waterLevel D
-extendable method net/minecraft/world/entity/vehicle/Boat isUnderwater ()Lnet/minecraft/world/entity/vehicle/Boat$Status;
-accessible field net/minecraft/world/entity/vehicle/Boat lastYd D
-extendable method net/minecraft/world/entity/vehicle/Boat floatBoat ()V
-accessible field net/minecraft/world/entity/vehicle/Boat invFriction F
-accessible field net/minecraft/world/entity/vehicle/Boat oldStatus Lnet/minecraft/world/entity/vehicle/Boat$Status;
-accessible field net/minecraft/world/entity/vehicle/Boat status Lnet/minecraft/world/entity/vehicle/Boat$Status;
-accessible field net/minecraft/world/entity/vehicle/Boat landFriction F
-accessible field net/minecraft/world/entity/vehicle/Boat deltaRotation F
-extendable method net/minecraft/world/entity/vehicle/Boat checkInWater ()Z
-accessible method net/minecraft/world/entity/vehicle/Boat getStatus ()Lnet/minecraft/world/entity/vehicle/Boat$Status;
-accessible field net/minecraft/client/renderer/entity/BoatRenderer boatResources Ljava/util/Map;
-mutable field net/minecraft/client/renderer/entity/BoatRenderer boatResources Ljava/util/Map;
-accessible method net/minecraft/world/entity/EntityType$Builder of (Lnet/minecraft/world/entity/EntityType$EntityFactory;Lnet/minecraft/world/entity/MobCategory;)Lnet/minecraft/world/entity/EntityType$Builder;
-accessible class net/minecraft/world/entity/EntityType$EntityFactory
+accessWidener v1 official
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat lastYd D
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat waterLevel D
+extendable method net/minecraft/world/entity/vehicle/boat/AbstractBoat isUnderwater ()Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat$Status;
+accessible method net/minecraft/world/entity/vehicle/boat/AbstractBoat floatBoat ()V
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat oldStatus Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat$Status;
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat status Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat$Status;
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat landFriction F
+accessible field net/minecraft/world/entity/vehicle/boat/AbstractBoat deltaRotation F
+accessible method net/minecraft/world/entity/vehicle/boat/AbstractBoat checkInWater ()Z
+extendable method net/minecraft/world/entity/vehicle/boat/AbstractBoat checkInWater ()Z
+accessible method net/minecraft/world/entity/vehicle/boat/AbstractBoat getStatus ()Lnet/minecraft/world/entity/vehicle/boat/AbstractBoat$Status;
+extendable method net/minecraft/world/entity/vehicle/boat/AbstractBoat floatBoat ()V

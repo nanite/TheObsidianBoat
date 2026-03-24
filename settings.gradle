@@ -1,10 +1,13 @@
 pluginManagement {
     repositories {
-        mavenLocal()
         gradlePluginPortal()
         maven {
-            name = 'Creeperhost'
-            url = 'https://maven.creeperhost.net/'
+            name = "NeoForge"
+            url = "https://maven.neoforged.net/"
+        }
+        maven {
+            name = "Fabric"
+            url = "https://maven.fabricmc.net/"
         }
         maven {
             name = 'Sponge Snapshots'

@@ -24,18 +24,16 @@
   "environment": "*",
   "entrypoints": {
     "client": [
-      "com.unrealdinnerbone.obsidianboat.ObsidianBoatFabricClient"
+      "com.unrealdinnerbone.obsidianboat.fabric.client.ObsidianBoatFabricClient"
     ],
     "fabric-datagen": [
-      "com.unrealdinnerbone.obsidianboat.data.OBFabricData"
+      "com.unrealdinnerbone.obsidianboat.fabric.client.data.OBFabricData"
     ]
   },
   "depends": {
-    "fabricloader": ">=0.14",
-    "fabric": "*",
+    "fabric-api": "*",
     "minecraft": "${minecraft_version}",
-    "java": ">=17",
-    "trenzalore": ">=${trenzalore_version}"
+    "java": ">=25"
   }
 }
   

@@ -27,6 +27,7 @@ public abstract class EntityMixin {
         }
     }
 
+    @Unique
     private Entity getSelf() {
         return (Entity) (Object) this;
     }

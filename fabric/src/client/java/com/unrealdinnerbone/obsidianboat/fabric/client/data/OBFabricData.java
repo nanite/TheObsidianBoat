@@ -1,4 +1,4 @@
-package com.unrealdinnerbone.obsidianboat.data;
+package com.unrealdinnerbone.obsidianboat.fabric.client.data;
 
 import com.unrealdinnerbone.obsidianboat.ObsidianBoat;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
