@@ -8,6 +8,7 @@ multiLoader.neo() {
 
 jar {
     from project(":common").sourceSets.main.output
+    from project(":common").sourceSets.client.output
 }
 
 
